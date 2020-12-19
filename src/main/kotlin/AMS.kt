@@ -2,9 +2,32 @@ import java.util.*
 
 fun main(args: Array<String>) {
     println("Hello ${args[0]}!")
-    feedTheFish()
-    val day = randomDay()
-    println("Should clean on $day? ${shouldChangeWater(day = day)}")
+    //feedTheFish()
+    //val day = randomDay()
+    //println("Should clean on $day? ${shouldChangeWater(day = day)}")
+    eagerExample()
+}
+
+fun eagerExample() {
+    val decorations = listOf("rock", "pagoda", "plastic plant", "alligator", "flower pot")
+
+    val eager = decorations.filter { it[0] == 'p' }
+    println(eager)
+
+    // apply filter lazily
+    val filtered = decorations.asSequence().filter { it[0] == 'p' }
+    println(filtered)
+    println(filtered.toList())
+
+    // apply map lazily
+    val lazyMap = decorations.asSequence().map {
+        println("map: $it")
+        it
+    }
+
+    println(lazyMap)
+    println("first: ${lazyMap.first()}")
+    println("all ${lazyMap.toList()}")
 }
 
 fun shouldChangeWater(

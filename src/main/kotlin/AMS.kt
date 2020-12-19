@@ -1,13 +1,32 @@
 import java.util.*
 
 fun main(args: Array<String>) {
-    // println("Hello ${args[0]}!")
-    // feedTheFish()
-    println(canAddFish(10.0, listOf(3,3,3)))
-    println(canAddFish(8.0, listOf(2,2,2), hasDecorations = false))
-    println(canAddFish(9.0, listOf(1,1,3), 3))
-    println(canAddFish(10.0, listOf(), 7, true))
+    println("Hello ${args[0]}!")
+    feedTheFish()
+    val day = randomDay()
+    println("Should clean on $day? ${shouldChangeWater(day = day)}")
 }
+
+fun shouldChangeWater(
+    day: String,
+    temperature: Int = 22,
+    dirty: Int = getDirtySensorReading()
+) : Boolean {
+    return when {
+        isTooHot(temperature) -> true
+        isDirty(dirty) -> true
+        isSunday(day) -> true
+        else -> false
+    }
+}
+
+fun isTooHot(temperature: Int) = temperature > 30
+
+fun isDirty(dirty: Int) = dirty > 30
+
+fun isSunday(day: String) = day == "Sunday"
+
+fun getDirtySensorReading() = 20
 
 fun feedTheFish() {
     val day = randomDay()

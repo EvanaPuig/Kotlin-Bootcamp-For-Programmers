@@ -1,11 +1,9 @@
-import java.util.*
-
 fun main() {
     var fortune: String
     for (i in 1..10) {
         fortune = getFortune(getBirthday())
         println("\nYour fortune is: $fortune")
-        if (fortune.contains("Take it easy")) break;
+        if (fortune.contains("Take it easy")) break
     }
 }
 
@@ -20,18 +18,12 @@ fun getFortune(birthday: Int): String {
         "Treasure your friends because they are your greatest fortune."
     )
 
-    return when(birthday) {
-        1 -> fortunes[6]
-        2 -> fortunes[5]
-        3 -> fortunes[4]
-        4 -> fortunes[3]
-        5 -> fortunes[2]
-        6 -> fortunes[1]
-        7 -> fortunes[0]
-        28 -> fortunes[5]
-        31 -> fortunes[3]
-        else -> fortunes[birthday.rem(fortunes.size)]
+    val index = when(birthday) {
+        in 1..7 -> 6
+        28, 31 -> 5
+        else -> birthday.rem(fortunes.size)
     }
+    return fortunes[index]
 }
 
 fun getBirthday(): Int {

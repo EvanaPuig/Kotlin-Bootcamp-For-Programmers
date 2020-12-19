@@ -51,10 +51,22 @@ fun isSunday(day: String) = day == "Sunday"
 
 fun getDirtySensorReading() = 20
 
+var dirty = 20
+
+var waterFilter: (Int)  -> Int = { dirty -> dirty / 2}
+
+fun feedFish(dirty: Int) = dirty + 10
+
+fun updateDirty(dirty: Int, operation: (Int) -> Int) : Int {
+    return operation(dirty)
+}
+
 fun feedTheFish() {
     val day = randomDay()
     val food = fishFood(day)
     println("Today is $day and the fish eat $food")
+
+    dirtyProcessor()
 }
 
 fun fishFood(day: String) : String{
@@ -94,4 +106,12 @@ fun canAddFish(
     hasDecorations: Boolean = true
 ): Boolean {
     return (tankSize * if (hasDecorations) 0.8 else 1.0) >= (currentFish.sum() + fishSize)
+}
+
+fun dirtyProcessor() {
+    dirty = updateDirty(dirty, waterFilter)
+    dirty = updateDirty(dirty, ::feedFish)
+    dirty = updateDirty(dirty)  { dirty ->
+        dirty + 50
+    }
 }

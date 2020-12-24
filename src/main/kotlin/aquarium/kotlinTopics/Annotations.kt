@@ -1,2 +1,0 @@
-package aquarium.kotlinTopics
-

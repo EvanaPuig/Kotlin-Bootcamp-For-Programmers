@@ -1,4 +1,4 @@
-package aquarium
+package aquarium.kotlinTopics
 
 // Extension functions are a substitute to what we usually do in util functions
 // Allows you to add functions to an existing class without having access to it's source code

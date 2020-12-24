@@ -1,4 +1,4 @@
-package aquarium
+package aquarium.kotlinTopics
 
 const val rocks = 3
 

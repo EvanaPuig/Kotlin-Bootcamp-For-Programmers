@@ -1,4 +1,6 @@
-package aquarium
+package aquarium.kotlinTopics
+
+import aquarium.Plecostomus
 
 fun main() {
     delegate()

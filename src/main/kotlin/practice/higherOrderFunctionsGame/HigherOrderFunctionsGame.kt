@@ -2,13 +2,19 @@ package practice.higherOrderFunctionsGame
 
 fun main() {
     val game = Game()
-    println(game.path)
+    /*println(game.path)
     game.north()
     game.east()
     game.south()
     game.west()
     game.end()
-    println(game.path)
+    println(game.path)*/
+
+    while(true) {
+        print("Enter a direction: n/s/e/w:")
+        game.makeMove(readLine())
+        println(game.path)
+    }
 }
 
 enum class Direction {
@@ -40,6 +46,24 @@ class Game {
         println(path)
         path.clear()
         false
+    }
+
+    fun move(where: () -> Boolean) {
+        where.invoke()
+    }
+
+    fun makeMove(move: String?) {
+        if (move == "n") {
+            move(north)
+        } else if (move == "s") {
+            move(south)
+        } else if (move == "e") {
+            move(east)
+        } else if (move == "w") {
+            move(west)
+        } else {
+            move(end)
+        }
     }
 }
 

@@ -9,9 +9,23 @@ fun main() {
 fun fishExamples() {
     val fish  = Fish("splashy")
 
+    // without inline an object is created every call to myWith
     myWith(fish.name) {
-        println(capitalize())
+        capitalize()
     }
+
+    /*
+    This is the equivalent of what the code without inline is doing
+    myWith(fish.name, object : Function1<String, Unit>  {
+        override fun invoke(name: String) {
+            name.capitalize()
+        }
+    })
+     */
+
+    // with inline no object is created, and lambda body is inlined here
+    // fish.name.capitalize()
+    // inline in complex functions does increase the code size
 
     // run returns the result of executing the lambda
     println(fish.run { name })
@@ -26,6 +40,6 @@ fun fishExamples() {
             .let { it + 31 })
 }
 
-fun myWith(name: String, block: String.() -> Unit) {
+inline fun myWith(name: String, block: String.() -> Unit) {
     name.block()
 }
